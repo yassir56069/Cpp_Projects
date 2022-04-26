@@ -3,6 +3,8 @@
 #include "classroom.h"
 using namespace std;
 
+const int class_size = 5; const int name_limit = 16;
+
 struct classroom {
     string fName, lName, fullName;
 } classA[class_size];
