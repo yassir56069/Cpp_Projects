@@ -3,13 +3,11 @@
 #include "classroom.h"
 using namespace std;
 
-int main(){
-    menu(); 
-    cout << "Closing.. " << endl; //program closing since menu stops running
-    return 0;
-}
+struct classroom {
+    string fName, lName, fullName;
+} classA[class_size];
 
-void menu(){
+void class_menu(){
     int choice;
     while (choice !=3 ){
         cout << "[Menu]+---" << endl;
