@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-using namespace std;void class_menu();
+using namespace std;
 
 void class_menu();
 
