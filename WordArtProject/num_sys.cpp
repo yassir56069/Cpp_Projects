@@ -73,12 +73,6 @@ int main() {
     w_screen(0);
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
-    int b[10]={1,2,3,4,5,6,7,8,9};
-    for(int c=0; c < 10; c++){
-        if (b[2] == 0){
-            cout << "empty";
-        } else {cout << "taken";}
-    }
     cout << "Run Time: "<< duration.count() / 1000 << "microseconds" << endl;
     return 0;
 }
@@ -93,8 +87,6 @@ void w_screen(int value){
     for (int i = 0; i < 1000; i++ ){
         letter_num = 0;
         while(letter_num < 5){
-            if (letter_num == 0) { cout << "this"; } 
-            else if (letter_num > 1) { cout << "this"; }
             cout << rows[letter_num] << endl;
             letter_num ++;
         }
