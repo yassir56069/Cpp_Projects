@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <string>
 using namespace std;
 
@@ -13,8 +14,8 @@ class group {
 
     public:
         group()  {
-            cout << "Enter The Group Name: "; cin >> group_name;
-            cout << "Enter The Group's Year: "; cin >> year;
+            cout << "Enter Student's The Group Name: "; cin >> group_name;
+            cout << "Enter The Student's  Year: "; cin >> year;
         }       
 
         //Setters
@@ -35,12 +36,6 @@ class subject: public group {
         int mark;
 
     public:
-        subject(){
-            cout << "Enter Subject Name: "; cin >> subject_name;
-            cout << "Enter Marks In Subject: "; cin >> mark;
-            num_subjects ++;
-        }
-
         //Setters
         void setSname(string n){ subject_name = n;}
         void setSavg(int a){ subject_avg = a;}
@@ -49,10 +44,15 @@ class subject: public group {
         string getSname(){return subject_name;}
         int getSavg(){return subject_avg;}
          
+        void add_subject(){
+            cout << "Enter The Subject Name: "; cin >> subject_name;
+            cout << "Enter Marks In Subject: "; cin >> mark;
+            num_subjects ++;
+        }
+
         void success_rate(){
             string result = (mark > min_mark) ? "Student Passed" : "Student Failed..";
             cout << result << endl;
-            cout << num_subjects << endl;
         }
 };
 
@@ -80,25 +80,28 @@ class student: public subject {
         }
 };
 
-
-
-double calc_avg(student, student);
 void disp_student(student);
 
 int main() {
-    student s_1; cout << endl;
-    student s_2; cout << endl;
- 
-    s_1.disp_student(); cout << endl; 
-    s_1.success_rate(); s_2.success_rate();
+    vector<string> g1;
+    string x;
+    int numStudents; 
 
-    cout << "Average: " << calc_avg(s_1 , s_2) << endl;
+    cout << "How many students are there?: "; cin >> numStudents;
+    
+    for (int i = 1; i <= numStudents ; i++){
+        cout << i << " ] Name: "; cin >> x;
+        g1.push_back(x);
+    }
 
+
+    cout << "Contents of Vector g1: " ; cout << endl;
+
+    for (int i = 0; i < g1.size(); i++){
+        cout << i+1 << " | " << g1[i] << endl;
+    }
+
+    cout << endl;
     return 0;
-}
-
-double calc_avg(student s1, student s2) {
-    double avg = (s1.getMark() + s2.getMark()) / 2;
-    return avg;
 }
 
