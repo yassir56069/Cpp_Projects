@@ -58,6 +58,40 @@
                     this->dmg = this->minDmg + ( std::rand() % ( this->maxDmg - this->minDmg  + 1 ) );
                 }
 
+                void takeDmg(Fighter person)
+                {
+                    person.rndDmg();
+                    this->health -= person.getDmg();
+                    std::cout << person.getName() << " attacks " << this->name << " and deals " << person.getDmg() << " damage \n";
+
+                    this->fighterStatus();
+                }
+
+                void duel(Fighter f2)
+                {
+                    int winflag = 0, numOfRounds = 0;                // winflag Bool:     1: fighter 1 won, 2: fighter 2 won 
+
+                    while ( this->getHealth() > 0 && f2.getHealth() > 0 )
+                    {
+                        numOfRounds ++;
+
+
+                        ( numOfRounds % 2 != 0 ) ? this->takeDmg(f2) : f2.takeDmg( *this );
+
+                        if ( this->getHealth() <= 0 ) { winflag = 1; } 
+                        if ( f2.getHealth() <= 0 ) { winflag = 2; } 
+                    }
+
+                    switch (winflag)
+                    {
+                        case 1:
+                            std::cout << this->getName() << " has Died and " <<  f2.getName() << " is victorious \n";
+                            break;
+
+                        default:
+                            std::cout <<  f2.getName()  << " has Died and " << this->getName() << " is victorious \n";
+                    }
+                }
 
             #pragma endregion
 
@@ -78,7 +112,7 @@
                 void doDmg();
 
             #pragma endregion
-    
+
     };
 
     #pragma region Fighter Build
@@ -117,7 +151,9 @@
 
         void Fighter::fighterStatus()
         {
-            std::cout << this->name << " is down to " << this->health << "health. \n";
+            if (this->health < 0) { this->health = 0; }
+
+            std::cout << this->name << " is down to " << this->health << " Health. \n";
         }
 
         void Fighter::doDmg()
@@ -126,8 +162,9 @@
             std::cout << this->name << " does " << this->dmg << " Damage. \n";
         }
 
-
     #pragma endregion
+
+
 
 #pragma endregion
 
@@ -137,7 +174,8 @@ int main()
     std::srand(std::time(0));    // initialises rand to be random
 
     Fighter test("Fred", 100, 30);
-    test.fighterStatus();
-    test.doDmg();
+    Fighter test2("John", 100, 30);
+
+    test.duel(test2);
 
 }
